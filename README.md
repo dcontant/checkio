@@ -18,11 +18,15 @@ lowercase.
 Let's look at this with an example. The message "Lorem ipsum dolor sit amet". And the key is 4123. The cut message 
 is "loremipsumdolorsitamet". In matrix form it will be:
 
-   4   1   2   3
-   l  or   e  mi
-  ps   u  md   o
-   l  or   s  it
-  am   e   t
+   4      1      2      3
+   
+   l    or   e    mi
+   
+  ps    u    md    o
+  
+   l    or   s    it
+   
+  am    e    t
 
 Now write the columns as they are numbered in the ascending order - "oruore", "emdst", "mioit", "lpslam". 
 The encoded message is "oruoreemdstmioitlpslam".
