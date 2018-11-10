@@ -1,5 +1,18 @@
 from math import ceil
+'''
+The Amsco Cipher is a transpostion cipher. Choose a number of columns, then write the plaintext ( no whitespace) into the columns going from left to right, alternating between writing one or two plaintext letters into each adjacent column and rows . Number the columns with a key consisting of unique digit, then write the ciphertext by going down each numbered column in order. 
 
+msg = 'lorem ipsum dolor sit amet',  key = 4123
+
+4   1   2   3
+l   or  e  mi
+ps  u  md  o
+l   or  s  it
+am  e   t
+
+encode text = oruoreemdstmioitlpslam
+
+'''
 def transpose(matrix):
     return [list(row) for row in zip(*matrix)]
 
