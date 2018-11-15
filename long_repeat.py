@@ -1,14 +1,12 @@
 def long_repeat(line):
     limit = len(line)
-    ans = [0]
+    ans = 0
     for i in range(limit):
         char = line[i]
-        current = 1
         for j in range(i+1,limit+1):
-            if line[i:j] == char*(j-i):
-                current = j-i
-        ans.append(current)
-    return max(ans)
+            if line[i:j] == char*(j-i) and ans < j-i:
+                ans = j-i
+    return ans
 
 
 if __name__ == '__main__':
