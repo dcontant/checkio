@@ -11,8 +11,16 @@ Precondition:
 2 < len(coordinates) < 10
 all(0 < x < 10 and 0 < x < 10 for x, y in coordinates) 
 '''
-from math import acos, sqrt
+
+
+
+from math import acos, sqrt, pi
+from operator import itemgetter
 def checkio(data):
+    def dist(a,b):
+            # distance between points a and b
+            return sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
+        
     def theta(pointA, pointB, pointC):
         # inner angle between vector BA et BC
         BA = (pointA[0]-pointB[0], pointA[1]-pointB[1])
@@ -21,30 +29,34 @@ def checkio(data):
         BA_length = sqrt((BA[0]**2 + BA[1]**2))
         BC_length = sqrt((BC[0]**2 + BC[1]**2))
         try:
-            return acos(dot_prod / (BA_length * BC_length))
-        except ZeroDivisionError: # vector dot product with vector of length 0
+            return round(acos(dot_prod / (BA_length * BC_length)), 10)
+        except ZeroDivisionError: # vector dot product with vector of length = 0
             return 0
-        except ValueError: # angle 0
-            return 0
-        
+        except ValueError: # angle = Pi in certain cases of floating point arithmetic ...
+            return pi
 
     hull = []
     starting_point = min(data)
+    p = starting_point
     ending_point = None
-    hull.append(data.index(starting_point))
-    max_angle = 0
-    pointA = (0,0)
-    pointB = starting_point
-    while True:
+    pointA = (p[0],p[1]+1) # first reference vector BA is parallel to the vertical
+    pointB = p
+    while starting_point != ending_point:
+        hull.append(data.index(p))
+        angle = pi
+        k = []
         for point in data:
-            if max_angle < theta(pointA, pointB, point):
-                max_angle = theta(pointA, pointB, point)
-                ending_point = point
-        if starting_point == ending_point:
-            break
-        hull.append(data.index(ending_point))
-        pointA, pointB = pointB, ending_point
-        max_angle = 0
+            if pointB != point  and theta(pointA, pointB, point) <= angle:
+                angle = theta(pointA, pointB, point)
+                p = point
+                k.append((p,angle,dist(pointB,point)))
+        # sort by angle and then by distance from ending_point, in cases of colinear points        
+        if k :
+            p = sorted(k, key = itemgetter(1,2))[0][0] 
+        pointA = (p[0]+(p[0]-pointB[0]), p[1]+(p[1]-pointB[1])) 
+        pointB = p
+        ending_point = p
+ 
     return hull
             
     
@@ -52,11 +64,17 @@ def checkio(data):
     
 
 if __name__ == '__main__':
-    #These "asserts" using only for self-checking and not necessary for auto-testing
+    
+    assert checkio([[7,4],[5,2],[4,7],[4,1],[3,6],[1,4]]) == [5,4,2,0,1,3]
+    
     assert checkio(
         [[7, 6], [8, 4], [7, 2], [3, 2], [1, 6], [1, 8], [4, 9]]
     ) == [4, 5, 6, 0, 1, 2, 3], "First example"
+    
     assert checkio(
         [[3, 8], [1, 6], [6, 2], [7, 6], [5, 5], [8, 4], [6, 8]]
-    ) == [1, 0, 6, 3, 5, 2], "Second example"   
+    ) == [1, 0, 6, 3, 5, 2], "Second example"  
+    assert checkio([[2,5],[5,5],[5,2],[2,2]]) == [3,0,1,2]
+
+    assert checkio([[2,0],[1,1],[3,1],[2,2]]) == [1,3,2,0]
     print('pass for all tests')
