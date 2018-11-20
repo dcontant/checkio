@@ -3,25 +3,21 @@
  The convex hull of a set X of points in the Euclidean plane is the smallest convex set that contains X. For instance: 
  when X is a bounded subset of the plane, the convex hull may be visualized as the shape formed by a rubber band stretched 
  around X. If a point lies on edge, it's included.
-
 The points are presented as a list of coordinates [x, y] in which x and y are integers. The result returns as a sequence of 
 indexes of points in the given list; points lie on the convex hull in clockwise order (see the picture). The sequence starts 
 from the bottom leftmost point. Remember: You should return a list of indexes--not the points themselves.
-
 Input: A list of coordinates. Each coordinate is a list of two integers.
-
 Output: The list of indexes of coordinates from the given list.
-
 Precondition:
 2 < len(coordinates) < 10
 all(0 < x < 10 and 0 < x < 10 for x, y in coordinates) 
 '''
 
-
-
 from math import acos, sqrt, pi
 from operator import itemgetter
+
 def checkio(data):
+    
     def dist(a,b):
             # distance between points a and b
             return sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
@@ -65,21 +61,14 @@ def checkio(data):
     return hull
             
     
-    
-    
 
 if __name__ == '__main__':
-    
+    assert checkio([[2,3],[6,3],[3,2],[7,2],[2,1],[6,1]]) == [4,0,1,3,5]
+    assert checkio([[7,6],[6,5],[3,7],[3,6],[5,3],[6,2],[3,2],[2,4],[1,4]]) == [8,2,0,5,6]
+    assert checkio([[9,9],[1,9],[1,1]]) == [2,1,0]
     assert checkio([[7,4],[5,2],[4,7],[4,1],[3,6],[1,4]]) == [5,4,2,0,1,3]
-    
-    assert checkio(
-        [[7, 6], [8, 4], [7, 2], [3, 2], [1, 6], [1, 8], [4, 9]]
-    ) == [4, 5, 6, 0, 1, 2, 3], "First example"
-    
-    assert checkio(
-        [[3, 8], [1, 6], [6, 2], [7, 6], [5, 5], [8, 4], [6, 8]]
-    ) == [1, 0, 6, 3, 5, 2], "Second example"  
+    assert checkio([[7, 6], [8, 4], [7, 2], [3, 2], [1, 6], [1, 8], [4, 9]]) == [4, 5, 6, 0, 1, 2, 3], "First example"
+    assert checkio([[3, 8], [1, 6], [6, 2], [7, 6], [5, 5], [8, 4], [6, 8]]) == [1, 0, 6, 3, 5, 2], "Second example"  
     assert checkio([[2,5],[5,5],[5,2],[2,2]]) == [3,0,1,2]
-
     assert checkio([[2,0],[1,1],[3,1],[2,2]]) == [1,3,2,0]
     print('pass for all tests')
