@@ -1,6 +1,7 @@
 from string import ascii_lowercase as letters
 
 def to_encrypt(text, n):
+    # to decrypt: same function with negative n
     return text.translate(str.maketrans(letters, letters[n:]+letters[:n]))
 
 
