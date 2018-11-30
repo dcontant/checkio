@@ -1,0 +1,41 @@
+def checkio(n):
+    ans = ''
+    m = n//1000
+    c = (n%1000)//100
+    x = (n%100)//10
+    i = n%10
+    ans += m*'M'
+    if c < 4:
+        ans += c*'C'
+    elif c == 4:
+        ans += 'CD'
+    elif 4 < c < 9:
+        ans += 'D'+ (c-5) * 'C'
+    else:
+        ans += 'CM'
+    if x < 4:
+        ans += x * 'X'
+    elif x == 4:
+        ans += 'XL'
+    elif 4 < x < 9:
+        ans += 'L' + (x-5) * 'X'
+    else:
+        ans += 'XC'
+    if i < 4:
+        ans += i *  'I'
+    elif i == 4:
+        ans += 'IV'
+    elif 4 < i < 9:
+        ans += 'V' + (i-5) * 'I'
+    else:
+        ans += 'IX'
+    return ans
+
+
+
+if __name__ == '__main__':
+    assert checkio(6) == 'VI', '6'
+    assert checkio(76) == 'LXXVI', '76'
+    assert checkio(499) == 'CDXCIX', '499'
+    assert checkio(3888) == 'MMMDCCCLXXXVIII', '3888'
+    print('all good')
