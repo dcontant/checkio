@@ -37,6 +37,7 @@ def out_spiral(n):
     return matrix
 
 def find_distance(a,b):
+    # manahattan distance between a and b in the spiral
     n = ceil(max(a,b)**0.5)
     if n%2 == 0:
         n += 1
