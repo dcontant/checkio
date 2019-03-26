@@ -1,15 +1,13 @@
 from math import e
 def choose_good_gift(current_gift, gifts_in_bag, gift_number):
-    # see the Secretary problem at Wikipedia
-    global gifts
+    # see https://en.wikipedia.org/wiki/Secretary_problem
+    global max_gift
     if gift_number == 1:
-        gifts = [current_gift]
+        max_gift = current_gift
     else:
-        gifts.append(current_gift)
-    if gift_number >= gifts_in_bag/e and current_gift >= max(gifts):
-        return True
-    else:
-        return False
+        max_gift = max(current_gift, max_gift)
+    return gift_number >= gifts_in_bag/e and current_gift == max_gift
+        
 
 
 if __name__ == '__main__':
