@@ -1,13 +1,13 @@
 from string import ascii_uppercase, digits
 
-def checkio(number, radix):
-    possible = dict(zip(str(digits + ascii_uppercase)[:radix], range(radix)))
-    if any(digit not in possible for digit in number):
+def checkio(number, base):
+    # convert a number to base 10, valid for base 2 to 36
+    base_digits = dict(zip((digits + ascii_uppercase)[:base], range(base)))
+    try:
+        return sum(base_digits[digit]*base**(len(number)-i-1) for i,digit in enumerate(number))
+    except KeyError:
         return -1
-    return sum(possible[digit]*radix**(len(number)-i-1) for i,digit in enumerate(number))
-
-
-#
+    
 if __name__ == '__main__':
     assert checkio("AF", 16) == 175, "Hex"
     assert checkio("101", 2) == 5, "Bin"
