@@ -1,7 +1,3 @@
-
-```python
-
-
 from typing import Iterable
 
 def section_weight(section):
@@ -36,4 +32,4 @@ if __name__ == '__main__':
     assert can_balance([7, 3, 4, 2, 9, 7, 4]) == -1
     assert can_balance([42]) == 0
     print("Coding complete? Click 'Check' to earn cool rewards!")
-```
+
